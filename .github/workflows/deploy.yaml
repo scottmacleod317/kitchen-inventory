@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - main
-    pull_request:
-      types: [opened, synchronized, reopened]
+  pull_request:
+    types: [opened, synchronized, reopened]
 
 jobs:
   deploy-resources:
@@ -12,7 +12,6 @@ jobs:
     defaults:
       run:
         shell: bash
-        #Inform a working directory if .tf files are not in root folder
         working-directory: ./terraform 
     
     steps:
