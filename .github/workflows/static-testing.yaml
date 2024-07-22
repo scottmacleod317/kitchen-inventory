@@ -2,9 +2,9 @@ name: Static testing
 on:
   push:
     branches:
-      - main
-    pull_request:
-      types: [opened, synchronized, reopened]
+      - '*'
+  pull_request:
+    types: [opened, synchronized, reopened]
 
 jobs:
   pre-commit:
