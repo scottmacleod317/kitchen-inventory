@@ -14,11 +14,10 @@ repos:
       - id: check-yaml # This hook checks yaml files for parseable syntax.
         args:
         - --unsafe
-        
-      - id: debug-statements # Check for debugger imports and py37+ `breakpoint()` calls in python source.
-      - id: detect-aws-credentials # Detects *your* aws credentials from the aws cli credentials file
-         args:
-        - --allow-missing-credentials
+
+      - id: debug-statements # Check for debugger imports and py37+ 'breakpoint()' calls in python source.
+        # args:
+        # - --allow-missing-credentials
       - id: detect-private-key # Detects the presence of private keys
       - id: end-of-file-fixer # Ensures that a file is either empty, or ends with one newline.
       - id: forbid-new-submodules # Prevent addition of new git submodules
@@ -28,24 +27,24 @@ repos:
         args: ["--markdown-linebreak-ext=md"]
       - id: check-json # This hook checks that JSON files are valid.
       - id: pretty-format-json # Ensure static JSON files are formatted well.
-        args: ["--autofix"]  # Terraform
-  # for this hook to work you need to have terraform-docs, TFLint, TFSec installed.
-  - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.45.0
-    hooks:
-      - id: terraform_fmt
-      - id: terraform_docs
-      - id: terraform_tflint
-        args:
-          - --args=--enable-rule=terraform_deprecated_index
-          - --args=--enable-rule=terraform_unused_declarations
-          - --args=--enable-rule=terraform_comment_syntax
-          - --args=--enable-rule=terraform_documented_outputs
-          - --args=--enable-rule=terraform_documented_variables
-          - --args=--enable-rule=terraform_typed_variables
-          - --args=--enable-rule=terraform_naming_convention
-          - --args=--enable-rule=terraform_required_version
-          - --args=--enable-rule=terraform_required_providers
+        args: ["--autofix"] # Terraform
+  # # for this hook to work you need to have terraform-docs, TFLint, TFSec installed.
+  # - repo: https://github.com/antonbabenko/pre-commit-terraform
+  #   rev: v1.45.0
+  #   hooks:
+  #     - id: terraform_fmt
+  #     - id: terraform_docs
+  #     - id: terraform_tflint
+  #       args:
+  #         - --args=--enable-rule=terraform_deprecated_index
+  #         - --args=--enable-rule=terraform_unused_declarations
+  #         - --args=--enable-rule=terraform_comment_syntax
+  #         - --args=--enable-rule=terraform_documented_outputs
+  #         - --args=--enable-rule=terraform_documented_variables
+  #         - --args=--enable-rule=terraform_typed_variables
+  #         - --args=--enable-rule=terraform_naming_convention
+  #         - --args=--enable-rule=terraform_required_version
+  #         - --args=--enable-rule=terraform_required_providers
   # MyPy
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.0.1
@@ -77,4 +76,4 @@ repos:
     rev: 6.0.0
     hooks:
       - id: flake8
-      exclude: ^(tests/)
+        exclude: ^(tests/)

@@ -4,11 +4,10 @@ terraform {
     prefix  = "terraform/state"
   }
 
-  required_version = "~> 1.1.9"
+  required_version = "~> 1.9.2"
 }
 
 provider "google" {
   project     = "var.project"
   region      = "eu-west2"
 }
-
