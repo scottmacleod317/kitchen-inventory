@@ -60,7 +60,7 @@ resource "google_secret_manager_secret_iam_member" "secret-access" {
 
 resource "google_sql_database_instance" "instance" {
   name             = "inventory-db"
-  region           = "eu-west2"
+  region           = var.region
   database_version = "POSTGRES_15"
   settings {
     tier = "db-f1-micro"
