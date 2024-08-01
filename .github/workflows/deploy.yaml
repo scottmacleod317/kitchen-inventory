@@ -24,8 +24,8 @@ jobs:
 
     - name: Build and push Docker image
       run: |-
-        docker tag eu-west2-docker.pkg.dev/solar-router-429817-i6/kitchen-inventory/kitchen-inv-app:${{ steps.extract_branch.outputs.branch }} .
-        docker push eu-west2-docker.pkg.dev/solar-router-429817-i6/kitchen-inventory/kitchen-inv-app
+        docker build -t eu-west2-docker.pkg.dev/solar-router-429817-i6/kitchen-inventory/kitchen-inv-app:${{ steps.extract_branch.outputs.branch }}
+        docker push eu-west2-docker.pkg.dev/solar-router-429817-i6/kitchen-inventory/kitchen-inv-app:${{ steps.extract_branch.outputs.branch }}
 
   deploy-resources:
     needs: deploy-image
