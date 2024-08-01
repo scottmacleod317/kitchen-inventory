@@ -1,4 +1,4 @@
-resource "google_cloud_run_v2_job" "default" {
+resource "google_cloud_run_v2_service" "default" {
   name     = "kitchen-inventory-service"
   location = var.region
   ingress = "INGRESS_TRAFFIC_ALL"
