@@ -1,6 +1,6 @@
 resource "google_cloud_run_v2_job" "default" {
   name     = "kitchen-inventory"
-  location = "eu-west2"
+  location = var.region
 
   template {
     template{
