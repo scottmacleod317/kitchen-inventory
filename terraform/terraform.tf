@@ -9,5 +9,5 @@ terraform {
 
 provider "google" {
   project     = var.project
-  region      = "eu-west2"
+  region      = "europe-west2"
 }
