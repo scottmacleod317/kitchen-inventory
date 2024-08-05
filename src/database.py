@@ -1,5 +1,4 @@
 import os
-from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
 from sqlalchemy.ext.declarative import declarative_base
@@ -7,19 +6,16 @@ from sqlalchemy.orm import sessionmaker
 from google.cloud.sql.connector import Connector, IPTypes
 import pg8000
 
-# load env vars
-load_dotenv()
-
 
 def init_connection_engine(connector: Connector) -> Engine:
-    instance_connection_name = os.environ[
+    instance_connection_name = os.getenv(
         "INSTANCE_CONNECTION_NAME"
-    ]  # e.g. 'project:region:instance'
-    db_user = os.environ["DB_USER"]  # e.g. 'my-db-user'
-    db_pass = os.environ["DB_PASS"]  # e.g. 'my-db-password'
-    db_name = os.environ["DB_NAME"]  # e.g. 'my-database'
+    )  # e.g. 'project:region:instance'
+    db_user = os.getenv("DB_USER")  # e.g. 'my-db-user'
+    db_pass = os.getenv("DB_PASS")  # e.g. 'my-db-password'
+    db_name = os.getenv("DB_NAME")  # e.g. 'my-database'
 
-    ip_type = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
+    ip_type = IPTypes.PRIVATE if os.getenv("PRIVATE_IP") else IPTypes.PUBLIC
 
     # initialize Cloud SQL Python Connector object
     connector = Connector()
