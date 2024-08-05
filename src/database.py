@@ -1,14 +1,10 @@
 import os
-from dotenv import load_dotenv
 from sqlalchemy import create_engine
 from sqlalchemy.engine import Engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from google.cloud.sql.connector import Connector, IPTypes
 import pg8000
-
-# load env vars
-load_dotenv()
 
 
 def init_connection_engine(connector: Connector) -> Engine:
