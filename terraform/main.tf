@@ -16,7 +16,7 @@ resource "google_cloud_run_v2_service" "default" {
     }
 
     containers {
-        image = "europe-west2-docker.pkg.dev/solar-router-429817-i6/kitchen-inventory/kitchen-inv-app"
+        image = "europe-west2-docker.pkg.dev/solar-router-429817-i6/kitchen-inventory/kitchen-inv-app:main"
 
       env {
         name = "FOO"

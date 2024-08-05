@@ -4,7 +4,7 @@ on:
     branches:
       - 'main'
   pull_request:
-    types: [opened, synchronized, reopened]
+    types: [opened, synchronize, edited, reopened]
 
 jobs:
   deploy-image:
@@ -39,8 +39,13 @@ jobs:
 
     - name: Build and push Docker image
       run: |-
-        docker build -t europe-west2-docker.pkg.dev/${{ vars.GCP_PROJECT }}/kitchen-inventory/kitchen-inv-app .
-        docker push europe-west2-docker.pkg.dev/${{ vars.GCP_PROJECT }}/kitchen-inventory/kitchen-inv-app
+        docker build -t europe-west2-docker.pkg.dev/${{ vars.GCP_PROJECT }}/kitchen-inventory/kitchen-inv-app:${{ steps.extract_branch.outputs.branch }} .
+        docker push europe-west2-docker.pkg.dev/${{ vars.GCP_PROJECT }}/kitchen-inventory/kitchen-inv-app:${{ steps.extract_branch.outputs.branch }}
+      env:
+        INSTANCE_CONNECTION_NAME: ${{ secrets.INSTANCE_CONNECTION_NAME }}
+        DB_USER: ${{ secrets.DB_USER }}
+        DB_PASS: ${{ secrets.DB_PASS }}
+        DB_NAME: ${{ secrets.DB_NAME }}
 
   deploy-resources:
     needs: deploy-image
@@ -71,15 +76,9 @@ jobs:
       run: terraform plan -input=false
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-        DB_USER: ${{ secrets.DB_USER }}
-        DB_PASS: ${{ secrets.DB_PASS }}
-        DB_NAME: ${{ secrets.DB_NAME }}
 
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve -input=false
       env:
         GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-        DB_USER: ${{ secrets.DB_USER }}
-        DB_PASS: ${{ secrets.DB_PASS }}
-        DB_NAME: ${{ secrets.DB_NAME }}
