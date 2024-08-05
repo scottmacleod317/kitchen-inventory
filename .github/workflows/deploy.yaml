@@ -39,8 +39,8 @@ jobs:
 
     - name: Build and push Docker image
       run: |-
-        docker build -t europe-west2-docker.pkg.dev/${{ vars.GCP_PROJECT }}/kitchen-inventory/kitchen-inv-app:${{ github.ref }} .
-        docker push europe-west2-docker.pkg.dev/${{ vars.GCP_PROJECT }}/kitchen-inventory/kitchen-inv-app:${{ github.ref }}
+        docker build -t europe-west2-docker.pkg.dev/${{ vars.GCP_PROJECT }}/kitchen-inventory/kitchen-inv-app:${{ steps.extract_branch.outputs.branch }} .
+        docker push europe-west2-docker.pkg.dev/${{ vars.GCP_PROJECT }}/kitchen-inventory/kitchen-inv-app:${{ steps.extract_branch.outputs.branch }}
       env:
         INSTANCE_CONNECTION_NAME: ${{ secrets.INSTANCE_CONNECTION_NAME }}
         DB_USER: ${{ secrets.DB_USER }}
