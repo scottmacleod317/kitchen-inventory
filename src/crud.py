@@ -13,7 +13,12 @@ def get_products(db: Session, skip: int = 0, limit: int = 10):
 
 
 def get_product_by_id(db: Session, product_id: int):
-    return db.query(models.Product).filter(models.Product.product_id == product_id).first()
+    product = db.query(models.Product).filter(models.Product.product_id == product_id).first()
+
+    if product is None:
+        raise HTTPException(status_code=404, detail="Product not found with ID {product_id}")
+    else:
+        return product
 
 
 def create_product(db: Session, product: schemas.ProductCreate):
@@ -26,8 +31,24 @@ def create_product(db: Session, product: schemas.ProductCreate):
 
 def delete_product_by_id(db: Session, product_id: int):
     product = db.query(models.Product).filter(models.Product.product_id == product_id).first()
+
     if product:
         db.delete(product)
         db.commit()
+    else:
+        raise HTTPException(status_code=404, detail="Product not found with ID {product_id}")
+
+
+def update_product_by_id(db: Session, product_id: int, product_partial: schemas.ProductUpdate):
+    product = db.query(models.Product).filter(models.Product.product_id == product_id).first()
+
+    if product:
+        product_data = product_partial.model_dump(exclude_unset=True)
+        for key, value in product_data.items():
+            setattr(product, key, value)
+        db.add(product)
+        db.commit()
+        db.refresh(product)
+        return product
     else:
         raise HTTPException(status_code=404, detail="Product not found with ID {product_id}")
