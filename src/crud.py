@@ -1,5 +1,7 @@
 from datetime import datetime, timezone
 
+from fastapi import HTTPException
+
 from sqlalchemy.orm import Session
 from sqlalchemy import desc
 
@@ -20,3 +22,12 @@ def create_product(db: Session, product: schemas.ProductCreate):
     db.commit()
     db.refresh(new_product)
     return new_product
+
+
+def delete_product_by_id(db: Session, product_id: int):
+    product = db.query(models.Product).filter(models.Product.product_id == product_id).first()
+    if product:
+        db.delete(product)
+        db.commit()
+    else:
+        raise HTTPException(status_code=404, detail="Product not found with ID {product_id}")
