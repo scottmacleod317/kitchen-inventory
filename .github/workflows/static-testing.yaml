@@ -18,6 +18,7 @@ jobs:
         python-version: '3.12.4'
 
     - uses: terraform-linters/setup-tflint@v1
+    - uses: pre-commit/action@v2.0.3
     - name: Pre-commit
       run: |
         pip install pre-commit
