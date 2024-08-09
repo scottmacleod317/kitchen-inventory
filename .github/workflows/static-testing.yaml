@@ -20,4 +20,4 @@ jobs:
     - uses: terraform-linters/setup-tflint@v1
     - uses: pre-commit/action@v2.0.3
       env:
-        SKIP: no-commit-to-branch,terraform_tfdocs
+        SKIP: no-commit-to-branch,terraform_docs
