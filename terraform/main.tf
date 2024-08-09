@@ -29,7 +29,6 @@ resource "google_cloud_run_v2_service" "default" {
     type    = "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST"
     percent = 100
   }
-  depends_on = [google_secret_manager_secret_version.secret-version-data]
 }
 
 resource "google_sql_database_instance" "instance" {
