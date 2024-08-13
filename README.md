@@ -1,5 +1,4 @@
 [![Static testing](https://github.com/scottmacleod317/kitchen-inventory/actions/workflows/static-testing.yaml/badge.svg)](https://github.com/scottmacleod317/kitchen-inventory/actions/workflows/static-testing.yaml)
-
 [![Deploy](https://github.com/scottmacleod317/kitchen-inventory/actions/workflows/deploy.yaml/badge.svg)](https://github.com/scottmacleod317/kitchen-inventory/actions/workflows/deploy.yaml)
 
 # Kitchen Inventory
@@ -8,7 +7,8 @@ Kitchen Inventory is a simple application for helping you keep track of what foo
 This repository contains the API and database.
 
 API: FastAPI deployed to GCP as a Cloud Run service.
-Datbase: Deployed to GCP as a Cloud SQL Postgres database.
+
+Database: Deployed to GCP as a Cloud SQL Postgres database.
 
 # CI/CD
 [GCP resource deployment](.github/workflows/deploy.yaml)
